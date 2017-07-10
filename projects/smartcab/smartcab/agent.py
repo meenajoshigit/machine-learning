@@ -45,6 +45,7 @@ class LearningAgent(Agent):
         # Update additional class parameters as needed
         # If 'testing' is True, set epsilon and alpha to 0
         #self.epsilon = 0.8** self.trial_num
+        
         self.epsilon = math.exp(-0.02 * self.trial_num)
         self.trial_num = self.trial_num + 1
         
@@ -132,10 +133,9 @@ class LearningAgent(Agent):
             highest = self.get_maxQ(state)
             action_dict = self.Q[state]
             
-            for key,value in action_dict.iteritems():
-                    if value == highest:
-                        return key
-
+            max_act= [k for k, v in action_dict.items()if v ==highest]
+            action = random.choice(max_act)
+ 
         return action
 
 
